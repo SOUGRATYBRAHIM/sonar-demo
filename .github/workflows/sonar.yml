@@ -30,11 +30,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4 Exécution des tests avec couverture
+        # 4 Run tests and coverage
       - name: Run tests and coverage
         run: |
-          export PYTHONPATH=$PWD
-          pytest --cov=src --cov-report=xml
+          cd $GITHUB_WORKSPACE
+          export PYTHONPATH=$GITHUB_WORKSPACE/src
+          pytest tests --cov=src --cov-report=xml
+
 
       # 5 Analyse SonarQube
       - name: SonarQube Scan
